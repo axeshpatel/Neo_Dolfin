@@ -4,7 +4,7 @@ import datetime
 class S3Service():
     ''' This is a service for getting objects from an S3 Bucket, with the option to get a specific object
         or to get the last modified'''
-    def get_specified_object(self, bucket_name, object_name):
+    def get_specified_object(bucket_name, object_name):
         # Get a specified object from a specified s3 bucket
         s3_client = boto3.client('s3')
 
@@ -12,7 +12,7 @@ class S3Service():
         
         return response['Body'].read()
 
-    def set_object(self, data, bucket_name, username, file_extension):
+    def set_object(data, bucket_name, username, file_extension):
         # Creates a new object, combining the user's username, the current time and the file extension to provide a unique filename
         s3_client = boto3.client('s3')
         current_time = datetime.datetime.now().strftime("%m%d%Y%H%M%S")
@@ -21,7 +21,7 @@ class S3Service():
 
         return response['HTTPStatusCode']
 
-    def get_latest(self, bucket_name, username):
+    def get_latest(bucket_name, username):
         # modified from https://stackoverflow.com/questions/45375999/how-to-download-the-latest-file-of-an-s3-bucket-using-boto3
         get_lateset_object = lambda obj: int(obj['LastModified'].strftime('%S'))
 
