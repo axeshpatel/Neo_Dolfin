@@ -30,7 +30,7 @@ class S3Service():
         
         return [obj['Key'] for obj in sorted(objects, key = get_latest_object)][0]
 
-    def create_bucket(bucket_name, configuration_json):
+    def create_bucket(bucket_name, configuration_json = None):
         # This method has many more properties that we can set. Worth discussing the merit of including these in our implementation
         # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/client/create_bucket.html
         s3 = boto3.client('s3')
