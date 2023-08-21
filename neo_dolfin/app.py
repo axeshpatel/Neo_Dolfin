@@ -15,6 +15,7 @@ import base64
 import qrcode
 import logging 
 
+from services.s3_service import S3Service
 #import dash
 #import dash_core_components as dcc
 #import dash_html_components as html
@@ -33,6 +34,14 @@ AWS_COGNITO_APP_CLIENT_ID = os.environ.get('AWS_COGNITO_APP_CLIENT_ID')#
 AWS_COGNITO_CLIENT_SECRET = os.environ.get('AWS_COGNITO_CLIENT_SECRET')
 
 client = boto3.client('cognito-idp', region_name=AWS_REGION)
+
+# Try to create a new S3 Bucket with that specific name
+try:
+    S3Service.create_bucket('neodolfin-transaction-data-storage-01')
+except Exception:
+    pass
+
+user_fund_data_object = S3Service.get_specified_object('neodolfin-transaction-data-storage-01', 'dummies.csv')
 
 # DASH APP
 # Initialize Dash app

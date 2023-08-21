@@ -1,0 +1,1 @@
+BASIQ_BASE_URL = "https://au-api.basiq.io/"
