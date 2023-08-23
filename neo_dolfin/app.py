@@ -287,7 +287,8 @@ def auth_news():
 # APPLICATION NEWS READ MORE PAGE
 @app.route('/newsdetails/<int:news_id>')
 def news_detail(news_id):
-    
+    if not is_token_valid():
+        return redirect('/signin')  # Redirect to sign-in page if the token is not valid
     return render_template('news_detail.html', news_id=news_id)
 
 
