@@ -14,6 +14,7 @@ import hmac
 import base64
 import qrcode
 import logging 
+import json
 
 #import dash
 #import dash_core_components as dcc#
@@ -282,6 +283,13 @@ def auth_news():
         return redirect('/signin')  # Redirect to sign-in page if the token is expired
     if is_token_valid():
         return render_template("news.html")
+
+# APPLICATION NEWS READ MORE PAGE
+@app.route('/newsdetails/<int:news_id>')
+def news_detail(news_id):
+    
+    return render_template('news_detail.html', news_id=news_id)
+
 
 # APPLICATION FAQ PAGE - REQUIRES USER TO BE SIGNED IN TO ACCESS
 @app.route('/FAQ/')
